@@ -23,8 +23,39 @@ class Solution:
             total_distance += abs(num1 - num2)
         
         return total_distance
+    
+    '''
+    Reads a file containing pairs of integers and calculates a similarity score.
+    The function processes each line in the input file, where each line consists
+    of two integers. The first integer is added to a list, and the second integer
+    is counted using a dictionary. The similarity score is computed by summing
+    the product of each integer from the first list and its corresponding count 
+    in the dictionary.
+    '''
+    def calculate_similarity_score(self, input_file: str) -> int:
+        first, second_counter = [], {}
+
+        with open(input_file, 'r') as file:
+            for line in file:
+                num1, num2 = map(int, line.split())
+
+                if num2 in second_counter:
+                    second_counter[num2] += 1
+                else:
+                    second_counter[num2] = 1
+                
+                first.append(num1)
+            
+        
+        similarity_score = 0
+        for num in first:
+            if num in second_counter:
+                similarity_score += num * second_counter[num]
+        
+        return similarity_score
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.find_total_distance("input.txt"))
+    print(f'Total Distance: {solution.find_total_distance("input.txt")}')
+    print(f'Similarity Score: {solution.calculate_similarity_score("input.txt")}')
         
