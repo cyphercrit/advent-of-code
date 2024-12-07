@@ -1,14 +1,17 @@
 class Solution:
+    def __init__(self, input_file: str):
+        self.input_file = input_file
+
     '''
     Takes an input file containting two numbers per line and
     sorts each side of the file into two lists, sorts each list,
     and then compares the sum of the total differences between 
     each number, returning that value.
     '''
-    def find_total_distance(self, input_file: str) -> int:
+    def find_total_distance(self) -> int:
         first, second = [], []
 
-        with open(input_file, 'r') as file:
+        with open(self.input_file, 'r') as file:
             for line in file:
                 num1, num2 = line.split()
                 
@@ -32,10 +35,10 @@ class Solution:
     the product of each integer from the first list and its corresponding count 
     in the dictionary.
     '''
-    def calculate_similarity_score(self, input_file: str) -> int:
+    def calculate_similarity_score(self) -> int:
         first, second_counter = [], {}
 
-        with open(input_file, 'r') as file:
+        with open(self.input_file, 'r') as file:
             for line in file:
                 num1, num2 = map(int, line.split())
 
@@ -55,7 +58,7 @@ class Solution:
         return similarity_score
 
 if __name__ == "__main__":
-    solution = Solution()
-    print(f'Total Distance: {solution.find_total_distance("input.txt")}')
-    print(f'Similarity Score: {solution.calculate_similarity_score("input.txt")}')
+    solution = Solution("input.txt")
+    print(f'Total Distance: {solution.find_total_distance()}')
+    print(f'Similarity Score: {solution.calculate_similarity_score()}')
         

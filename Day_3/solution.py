@@ -1,10 +1,13 @@
 import re
 
 class Solution:
-    def find_mul(self, input_file: str) -> int:
+    def __init__(self, input_file: str):
+        self.input_file = input_file
+
+    def find_mul(self) -> int:
         product = 0
 
-        with open(input_file, 'r') as file:
+        with open(self.input_file, 'r') as file:
             for line in file:
                 matches = re.findall(r'mul\((\d+),(\d+)\)', line)
 
@@ -14,10 +17,10 @@ class Solution:
         
         return product
     
-    def find_mul_strict(self, input_file: str) -> int:
+    def find_mul_strict(self) -> int:
         product = 0
 
-        with open(input_file, 'r') as file:
+        with open(self.input_file, 'r') as file:
             corrupted_file = file.read()
 
         corrupted_file = re.sub(r"don't\(\).*?(?=do\(\)|$)", "", corrupted_file, flags=re.DOTALL)    
@@ -30,6 +33,6 @@ class Solution:
         return product
 
 if __name__ == "__main__":
-    solution = Solution()
-    print(f'Total Product: {solution.find_mul("input.txt")}')
-    print(f'Total Product (strict): {solution.find_mul_strict("input.txt")}')
+    solution = Solution("input.txt")
+    print(f'Total Product: {solution.find_mul()}')
+    print(f'Total Product (strict): {solution.find_mul_strict()}')

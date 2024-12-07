@@ -1,4 +1,7 @@
 class Solution:
+    def __init__(self, input_file: str):
+        self.input_file = input_file
+
     def is_safe_report(self, report: list) -> bool:
         increasing = True
         if report[1] - report[0] < 0:
@@ -12,10 +15,10 @@ class Solution:
         
         return True
 
-    def safe_reports(self, input_file: str) -> int:
+    def safe_reports(self) -> int:
         num_safe = 0
 
-        with open(input_file, 'r') as file:
+        with open(self.input_file, 'r') as file:
             for line in file:
                 level_list = list(map(int, line.split()))
 
@@ -24,10 +27,10 @@ class Solution:
         return num_safe
     
     # this probably isn't entirely optimal
-    def somewhat_safe_reports(self, input_file: str) -> int:
+    def somewhat_safe_reports(self) -> int:
         num_safe = 0
 
-        with open(input_file, 'r') as file:
+        with open(self.input_file, 'r') as file:
             for line in file:
                 level_list = list(map(int, line.split()))
                 if not self.is_safe_report(level_list):
@@ -41,6 +44,6 @@ class Solution:
         return num_safe
 
 if __name__ == "__main__":
-    solution = Solution()
-    print(f'Number of Safe Reports: {solution.safe_reports("input.txt")}')
-    print(f'Number of Somewhat Safe Reports: {solution.somewhat_safe_reports("input.txt")}')
+    solution = Solution("input.txt")
+    print(f'Number of Safe Reports: {solution.safe_reports()}')
+    print(f'Number of Somewhat Safe Reports: {solution.somewhat_safe_reports()}')
