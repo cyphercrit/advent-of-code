@@ -33,6 +33,6 @@ class Solution:
         return product
 
 if __name__ == "__main__":
-    solution = Solution("input.txt")
+    solution = Solution("./data/input_large.txt")
     print(f'Total Product: {solution.find_mul()}')
     print(f'Total Product (strict): {solution.find_mul_strict()}')

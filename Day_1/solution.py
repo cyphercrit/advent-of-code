@@ -58,7 +58,7 @@ class Solution:
         return similarity_score
 
 if __name__ == "__main__":
-    solution = Solution("input.txt")
+    solution = Solution("./data/input_large.txt")
     print(f'Total Distance: {solution.find_total_distance()}')
     print(f'Similarity Score: {solution.calculate_similarity_score()}')
         

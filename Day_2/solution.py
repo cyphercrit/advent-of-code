@@ -44,6 +44,6 @@ class Solution:
         return num_safe
 
 if __name__ == "__main__":
-    solution = Solution("input.txt")
+    solution = Solution("./data/input_large.txt")
     print(f'Number of Safe Reports: {solution.safe_reports()}')
     print(f'Number of Somewhat Safe Reports: {solution.somewhat_safe_reports()}')
