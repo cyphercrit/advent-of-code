@@ -5,13 +5,25 @@ class Solution:
 
         with open(self.input_file, 'r') as file:
             for line in file:
-                self.board.append(line.split())
+                line = line.replace("\n", "") # gets rid of the problematic newline character
+                self.board.append(list(line))
         
         self.rows = len(self.board)
         self.cols = len(self.board[0])
 
-    def check_index(self, row_index: int, col_index: int, dr: int, dc: int) -> int:
-        pass
+    def check_index(self, row_index: int, col_index: int, dx: int, dy: int) -> int:
+        col_bounds, row_bounds =  col_index + (dx * 3), row_index + (dy * 3) 
+        if col_bounds > self.cols - 1 or col_bounds < 0 or row_bounds > self.rows - 1 or row_bounds < 0:
+            return 0
+        
+        rest_of_word = "MAS"
+        for i in range(len(rest_of_word)):
+            row_index += dy
+            col_index += dx
+            if self.board[row_index][col_index] != rest_of_word[i]:
+                return 0
+        
+        return 1
     
     def find_matches_of_index(self, row_index: int, col_index: int) -> int:
         num_found = 0
@@ -27,8 +39,8 @@ class Solution:
             (-1, -1), # up-left
         ]
 
-        for dr, dc in directions:
-            pass
+        for dx, dy in directions:
+            num_found += self.check_index(row_index, col_index, dx, dy)
             
         return num_found
     
@@ -41,7 +53,17 @@ class Solution:
                     total_found += self.find_matches_of_index(row, col)
         
         return total_found
+    
+    def check_cross(self, row_index: int, col_index: int) -> int:
+        if row_index < 1 or row_index > self.rows - 2 or col_index < 1 or col_index > self.rows - 2:
+            return 0
+        
+        
+    
+    def find_all_crosses(self) -> int:
+        pass
 
 if __name__ == "__main__":
-    solution = Solution("./data/input_small.txt")
-    solution.find_matches_of_index(1,2)
+    solution = Solution("./data/input_large.txt")
+    print(f'XMAS Matches Found: {solution.find_all_matches()}')
+    print(f'X-MAS Cross Matches Found: {solution.find_all_crosses()}')
