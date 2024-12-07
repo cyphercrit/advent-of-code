@@ -58,10 +58,39 @@ class Solution:
         if row_index < 1 or row_index > self.rows - 2 or col_index < 1 or col_index > self.rows - 2:
             return 0
         
+        # four corners
+        indices = [
+            (row_index + 1, col_index + 1),
+            (row_index - 1, col_index - 1),
+            (row_index + 1, col_index - 1),
+            (row_index - 1, col_index + 1)
+        ]
+
+        for i in range(2):
+            available_set = {"M", "S"}
+            j, k = indices.pop()
+            x, y = indices.pop()
+            letter1 = self.board[j][k]
+            letter2 = self.board[x][y]
+
+            if letter1 not in available_set:
+                return 0
+            available_set.remove(letter1)
+
+            if letter2 not in available_set:
+                return 0
         
+        return 1
     
     def find_all_crosses(self) -> int:
-        pass
+        total_found = 0
+
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if self.board[row][col] == "A":
+                    total_found += self.check_cross(row, col)
+        
+        return total_found
 
 if __name__ == "__main__":
     solution = Solution("./data/input_large.txt")
