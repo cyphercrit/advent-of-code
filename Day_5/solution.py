@@ -9,7 +9,7 @@ class Solution:
             for line in file:
                 line = line.strip()
                 if reached_newline:
-                    self.page_orders.append(list(map(int, line.split(','))))
+                    self.page_orders.append([int(x) for x in line.split(",")])
                 elif not line:
                     reached_newline = True
                     continue
